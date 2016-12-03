@@ -89,7 +89,7 @@ class Articles @Inject() (
       // if there is some article, return a future of result with the article and its attachments
       result <- maybeArticle.map { article =>
         // search for the matching attachments
-        // find(...).toList returns a future list of documents (here, a future list of ReadFileEntry)
+        // find(...).toList returns a future  list of documents (here, a future list of ReadFileEntry)
         gridFS.find[JsObject, JSONReadFile](
           Json.obj("article" -> article.id.get)).collect[List]().map { files =>
           val filesWithId = files.map { file =>
