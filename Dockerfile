@@ -37,7 +37,7 @@ EXPOSE 27017
 RUN mkdir /app
 WORKDIR /app
 
-RUN git clone https://github.com/sgodbillon/reactivemongo-demo-app.git
-WORKDIR /app/reactivemongo-demo-app
+RUN git clone https://github.com/nandinicbit1981/sr-reactive.git
+WORKDIR /app/sr-reactive
 
 CMD ["sbt", "run"]
