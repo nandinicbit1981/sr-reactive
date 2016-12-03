@@ -18,3 +18,41 @@ h2 { margin-bottom: 20px;}
 form.form-horizontal label { width: 160px; float: left; }
 form.form-horizontal div.input { overflow: hidden; margin-bottom: 15px;}
 form.form-horizontal .help-block { font-style: italic; }
+
+.center {
+	margin: auto;
+	width: 70%;
+	padding: 10px;
+}
+.background-dd {
+	background-image: url('../images/wp3.jpg');
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-attachment: fixed;
+	background-size: cover;
+	height:100%
+}
+
+.button-div {
+	padding-left: 360px;
+	padding-top: 300px;
+}
+
+.navbar {
+	background: none;
+
+	border:none;
+	color:navajowhite;
+}
+
+.navbar-header {
+	color:navajowhite;
+}
+
+.text-white{
+	color:wheat; !important;
+}
+
+.background-white {
+	background-color: rgba(245, 245, 245, 0.8);
+}

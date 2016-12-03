@@ -2,17 +2,25 @@ package controllers
 
 import javax.inject.Inject
 
-import models.Characters
-import play.api.Logger
-import play.api.i18n.MessagesApi
-import play.api.libs.concurrent.Execution.Implicits.defaultContext
-import play.api.libs.json.{JsObject, JsString, Json}
-import play.api.mvc.{Action, Controller, Request}
-import play.modules.reactivemongo.{MongoController, ReactiveMongoApi, ReactiveMongoComponents}
-import reactivemongo.api.gridfs.ReadFile
-
 import scala.concurrent.Future
 
+import play.api.Logger
+import play.api.Play.current
+import play.api.i18n.{ I18nSupport, MessagesApi }
+import play.api.mvc.{ Action, Controller, Request }
+import play.api.libs.concurrent.Execution.Implicits.defaultContext
+import play.api.libs.json.{ Json, JsObject, JsString }
+
+import reactivemongo.api.gridfs.{ GridFS, ReadFile }
+
+import play.modules.reactivemongo.{
+MongoController, ReactiveMongoApi, ReactiveMongoComponents
+}
+
+import play.modules.reactivemongo.json._, ImplicitBSONHandlers._
+import play.modules.reactivemongo.json.collection._
+
+import models.Article, Article._,models.Characters, Characters._
 
 /**
   * Created by nandpa on 11/22/16.
@@ -23,7 +31,7 @@ class CharactersController  @Inject()(
   extends Controller with MongoController with ReactiveMongoComponents {
 
   import java.util.UUID
-
+  import MongoController.readFileReads
   type JSONReadFile = ReadFile[JSONSerializationPack.type, JsString]
 
   // get the collection 'articles'
@@ -85,17 +93,30 @@ class CharactersController  @Inject()(
       result <- maybeCharacters.map { characters =>
         // search for the matching attachments
         // find(...).toList returns a future list of documents (here, a future list of ReadFileEntry)
-        gridFS.find[JsObject, JSONReadFile](
-          Json.obj("characters" -> characters.id.get)).collect[List]().map { files =>
-          val filesWithId = files.map { file =>
-            file.id -> file
-          }
+        //gridFS.find[JsObject, JSONReadFile](
+//          Json.obj("characters" -> characters.id.get)).collect[List]().map { files =>
+//          val filesWithId = files.map { file =>
+//            file.id -> file
+//          }
+//
+//          implicit val messages = messagesApi.preferred(request)
+//
+//          // Ok(views.html.editCharacters(Some(id), Characters.form.fill(characters), Some(filesWithId)))
+//          //Ok(views.html.editCharacters(Some(id), characters, Some(filesWithId)))
+//          Ok(views.html.editCharacters(characters))
 
-          implicit val messages = messagesApi.preferred(request)
 
-          // Ok(views.html.editCharacters(Some(id), Characters.form.fill(characters), Some(filesWithId)))
-          //Ok(views.html.editCharacters(Some(id), characters, Some(filesWithId)))
-          Ok(views.html.editCharacters(characters))
+
+
+          gridFS.find[JsObject, JSONReadFile](
+            Json.obj("characters" -> characters.id.get)).collect[List]().map { files =>
+            val filesWithId = files.map { file =>
+              file.id -> file
+            }
+
+            implicit val messages = messagesApi.preferred(request)
+            Ok(views.html.editCharacters(characters))
+
 
         }
       }.getOrElse(Future(NotFound))
@@ -216,7 +237,6 @@ class CharactersController  @Inject()(
   }
 
   def delete(id: String) = Action.async {
-    // let's collect all the attachments matching that match the article to delete
     gridFS.find[JsObject, JSONReadFile](Json.obj("article" -> id)).
       collect[List]().flatMap { files =>
       // for each attachment, delete their chunks and then their file entry
