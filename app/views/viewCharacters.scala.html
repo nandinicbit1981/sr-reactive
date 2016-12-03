@@ -1,0 +1,147 @@
+@(characters: models.Characters)
+
+<html>
+    <head>
+        <link href="@routes.Assets.at("bootstrap/css/bootstrap.css")" rel="stylesheet">
+        <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+        </style>
+        <link href="@routes.Assets.at("bootstrap/css/bootstrap-responsive.css")" rel="stylesheet">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <script src="@routes.Assets.at("javascripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/main.js")" type="text/javascript"></script>
+    </head>
+
+    <body>
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="/">Characters</a>
+                    <a class="brand" href="/characters/create">create</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="center background-white row">
+            <div class="col-sm-10">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        @characters.name
+                    </div>
+                    <div class="form-group">
+                        <label>Class:</label>
+                        <div>
+                            @characters.className
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Race:</label>
+                        <div>
+                            @characters.race
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div>
+                            <label>Strength:</label>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-2">
+                        Stat:  @characters.strength_stat
+                            </div>
+                            <div class="col-sm-2">
+                        Mod : @characters.strength_mod
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <div>
+                            <label>Dexterity:</label>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2">
+                        Stat:  @characters.dex_stat
+                            </div>
+                            <div class="col-sm-2">
+                        Mod:  @characters.dex_mod
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div>
+                            <label>Constitution:</label>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2">
+                        Stat:  @characters.con_stat
+                            </div>
+                            <div class="col-sm-2">
+                        Mod:  @characters.con_mod
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <label>Intelligence:</label>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2">
+                        Stat:  @characters.intl_stat
+                            </div>
+                            <div class="col-sm-2">
+                        Mod:  @characters.intl_mod
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div>
+                            <label>Wisdom:</label>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2">
+                        Stat: @characters.wsdm_stat
+                            </div>
+                            <div class="col-sm-2">
+                        Mod:  @characters.wsdm_mod
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div>
+                            <label>Charisma:</label>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2">
+                        Stat:  @characters.chr_stat
+                            </div>
+                            <div class="col-sm-2">
+                        Mod: @characters.chr_mod
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>AC:</label>
+                        @characters.ac
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

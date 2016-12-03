@@ -13,5 +13,15 @@ POST    /articles/:id/attachments   controllers.Articles.saveAttachment(id)
 GET     /attachments/:id            controllers.Articles.getAttachment(id)
 DELETE  /attachments/:id            controllers.Articles.removeAttachment(id)
 
+
+GET     /characters                 controllers.CharactersController.index
+GET     /characters/create          controllers.CharactersController.createForm
+PUT     /characters                 controllers.CharactersController.create
+GET     /characters/html/:id        controllers.CharactersController.getCharacter(id)
+GET     /characters/json/:id        controllers.CharactersController.getCharacterJSON(id)
+GET     /characters/edit/:id        controllers.CharactersController.showEditForm(id)
+POST    /characters/:id             controllers.CharactersController.edit(id)
+DELETE  /characters/:id             controllers.CharactersController.delete(id)
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

@@ -1,0 +1,175 @@
+@(characters: models.Characters)
+
+<html>
+    <head>
+        <link href="@routes.Assets.at("bootstrap/css/bootstrap.css")" rel="stylesheet">
+        <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+        </style>
+        <link href="@routes.Assets.at("bootstrap/css/bootstrap-responsive.css")" rel="stylesheet">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <script src="@routes.Assets.at("javascripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/main.js")" type="text/javascript"></script>
+    </head>
+    <body>
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="/">Characters</a>
+                    <a class="brand" href="/characters/create">create</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-10 background-white" style="padding: 50px;">
+            <div>
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="name" class="form-control" id="name" value="@characters.name">
+                    </div>
+                    <div class="form-group">
+                        <label>Class:</label>
+                        <div>
+                            <select class="selectpicker" id="classSelect" data-value="@characters.className">
+                                <optgroup label="select">
+                                    <option>Fighter</option>
+                                    <option>Cleric</option>
+                                    <option>Wizard</option>
+                                    <option>Thief</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Race:</label>
+                        <div>
+                             <select class="selectpicker" id="raceSelect" data-value="@characters.race">
+                                <optgroup label="select">
+                                    <option>Human</option>
+                                    <option>Dwarf</option>
+                                    <option>Elf</option>
+                                    <option>Half-elf</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Strength:</label>
+                        <div class="row">
+
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="strength_stat" value="@characters.strength_stat">
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control"  disabled="disabled" id="strength_mod" value="@characters.strength_mod">
+                            </div>
+                            <div class="col-sm-3">
+                                <button id="strength_roll" class="form-control btn btn-info">roll</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Dexterity:</label>
+                        <div class="row">
+
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="dex_stat" value="@characters.dex_stat">
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" disabled="disabled" id="dex_mod" value="@characters.dex_mod">
+                            </div>
+                            <div class="col-sm-3">
+                                <button id="dex_roll" class="form-control btn btn-info">roll</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Constitution:</label>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="con_stat" value="@characters.con_stat">
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" disabled="disabled" id="con_mod" value="@characters.con_mod">
+                                <input type="text" class="form-control" disabled="disabled" id="con_mod" value="@characters.con_mod">
+                            </div>
+                            <div class="col-sm-3">
+                                <button id="con_roll" class="form-control btn btn-info">roll</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Intelligence:</label>
+                        <div class="row">
+
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="intl_stat" value="@characters.intl_stat">
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" disabled="disabled" id="intl_mod" value="@characters.intl_mod">
+                            </div>
+                            <div class="col-sm-3">
+                                <button id="intl_roll" class="form-control btn btn-info">roll</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Wisdom:</label>
+                        <div class="row">
+
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="wsdm_stat" value="@characters.wsdm_stat">
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" disabled="disabled" id="wsdm_mod" value="@characters.wsdm_mod">
+                            </div>
+                            <div class="col-sm-3">
+                                <button id="wsdm_roll" class="form-control btn btn-info">roll</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Charisma:</label>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="charisma_stat" value="@characters.chr_stat">
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" disabled="disabled" id="charisma_mod" value="@characters.chr_mod">
+                            </div>
+                            <div class="col-sm-3">
+                                <button id="charisma_roll" class="form-control btn btn-info">roll</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>AC:</label>
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <input type="text" disabled="disabled" class="form-control" id="ac" value="@characters.ac">
+                            </div>
+
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-default" id="editSubmitBtn" data-id="@characters.id">Submit</button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
