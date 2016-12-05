@@ -2,8 +2,6 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-
-GET     /                           controllers.Articles.index
 GET     /articles/new               controllers.Articles.showCreationForm
 POST    /articles/new               controllers.Articles.create
 GET     /articles/:id               controllers.Articles.showEditForm(id)
@@ -12,8 +10,9 @@ DELETE  /articles/:id               controllers.Articles.delete(id)
 POST    /articles/:id/attachments   controllers.Articles.saveAttachment(id)
 GET     /attachments/:id            controllers.Articles.getAttachment(id)
 DELETE  /attachments/:id            controllers.Articles.removeAttachment(id)
+GET     /articles                   controllers.Articles.index
 
-
+GET     /                           controllers.CharactersController.index
 GET     /characters                 controllers.CharactersController.index
 GET     /characters/create          controllers.CharactersController.createForm
 PUT     /characters                 controllers.CharactersController.create
